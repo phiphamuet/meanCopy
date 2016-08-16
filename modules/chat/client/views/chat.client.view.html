@@ -1,0 +1,18 @@
+<!-- The chat view -->
+<section class="container">
+  <!--<div class="page-header">
+    <h1>Chat Example</h1>
+  </div>-->
+  <!-- The message form -->
+  <div class="col-xs-12 col-md-4 all-people">
+    <h3>Tìm kiếm người và nhóm</h3>
+    <div class="people row" ui-sref=".private({id:'{{member._id}}'})" ng-repeat="member in listMember" ng-if="notMe(member)">
+      <img ng-src="{{member.profileImageURL}}" alt="admin" class="pull-left chat-profile-image"/>
+      <div class="pull-left name-label chat-message-details">
+        <strong>{{member.firstName}}
+          {{member.lastName}}</strong>
+      </div>
+    </div>
+  </div>
+  <div ui-view></div>
+</section>
