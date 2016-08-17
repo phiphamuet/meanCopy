@@ -1,11 +1,12 @@
 'use strict';
 
 // Create the 'chat' controller
-angular.module('chat').controller('ChatController', ['$scope', '$location', 'Authentication', 'Socket',
-	function ($scope, $location, Authentication, Socket) {
+angular.module('chat').controller('ChatController', ['$scope', '$location', 'Authentication', 'Socket', '$http',
+	function ($scope, $location, Authentication, Socket, $http) {
 		// Create a messages array
 		$scope.messages = [];
-		$scope.listMember = [];
+		$scope.listMemberOnline = [];
+		$scope.historyMessage = [];
 		// If user is not signed in then redirect back home
 		if (!Authentication.user) {
 			$location.path('/');
@@ -51,7 +52,7 @@ angular.module('chat').controller('ChatController', ['$scope', '$location', 'Aut
 		//Receive Member
 		Socket.on('listMember', function (data) {
 			console.log(data);
-			$scope.listMember = data.listMember.filter(function (value) {
+			$scope.listMemberOnline = data.listMember.filter(function (value) {
 				var temp = value;
 				delete temp.$$hashKey;
 				if (temp === window.user) {
@@ -60,5 +61,23 @@ angular.module('chat').controller('ChatController', ['$scope', '$location', 'Aut
 				return value;
 			});
 		});
+
+		//get message history
+		$http.get('/api/users/messageHistory')
+		.success(function(values){
+			$scope.historyMessage = values;
+		})
+		.error(function(err){
+			console.log(err)
+		})
+
+		//not online
+		$scope.notOnline = function(member){
+			var kq = true;
+			$scope.listMemberOnline.map(function(value){
+				if(value._id == member._id) kq =false;
+			});
+			return kq;
+		}
 	}
 ]);
