@@ -2,7 +2,7 @@
 <ul class="list-unstyled col-md-offset-4 col-md-8 messageContainer">
   <!-- List all messages -->
   <li class="col-xs-12 col-md-12 chat-message" ng-repeat="message in messages" ng-class="notMe(message.sender)?'other-message':'my-message'">
-    <small class="text-muted" ng-bind="message.created | date:'mediumTime'"></small>
+    <small class="text-muted" ng-bind="message.created | date:'dd/MM HH:mm'"></small>
     <div class="chat-message-details">
       <strong ng-bind="message.username"></strong>
       <br>

@@ -4,8 +4,8 @@
 'use strict';
 
 // Create the 'chat' controller
-angular.module('chat').controller('ChatPrivateController', ['$scope', '$location', 'Authentication', 'Socket', '$state', '$http',
-	function ($scope, $location, Authentication, Socket, $state, $http) {
+angular.module('chat').controller('ChatPrivateController', ['$scope', '$location', 'Authentication', 'Socket', '$state', '$http', '$timeout',
+	function ($scope, $location, Authentication, Socket, $state, $http, $timeout) {
 		$scope.receiver;
 		// Create a messages array
 		$scope.messages = [];
@@ -48,6 +48,7 @@ angular.module('chat').controller('ChatPrivateController', ['$scope', '$location
 		Socket.on('privateMessage', function (message) {
 			
 			$scope.messages.push(message);
+			// $("ul.messageContainer").scrollTop = $("ul.messageContainer li:last-child").offsetTop;
 		});
 		// Private message
 		Socket.on('chatMessage', function (message) {
@@ -58,6 +59,7 @@ angular.module('chat').controller('ChatPrivateController', ['$scope', '$location
 					(message.sender == user._id && message.receiver == $state.params.id)
 				)
 				$scope.messages.push(message);
+				$timeout(function(){document.querySelector("ul.messageContainer").scrollTop = document.querySelector("ul.messageContainer li:last-child").offsetTop});
 			} else {
 				$scope.messages.push(message);
 			}
