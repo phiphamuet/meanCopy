@@ -42,13 +42,13 @@ module.exports = function (io, socket) {
 
     // Emit the status event when a socket client is disconnected
     socket.on('disconnect', function () {
-        io.emit('chatMessage', {
-            type: 'status',
-            text: 'disconnected',
-            created: Date.now(),
-            profileImageURL: socket.request.user.profileImageURL,
-            username: socket.request.user.username
-        });
+        // io.emit('chatMessage', {
+        //     type: 'status',
+        //     text: 'disconnected',
+        //     created: Date.now(),
+        //     profileImageURL: socket.request.user.profileImageURL,
+        //     username: socket.request.user.username
+        // });
         connectedMember = connectedMember.filter(function(value){
             if(value === socket.request.user){
                 return false;
@@ -67,15 +67,14 @@ module.exports = function (io, socket) {
         message.sender = socket.userId;
         message.profileImageURL = socket.request.user.profileImageURL;
         message.username = socket.request.user.username;
-        console.log(socket.request.user.socketId);
-        console.log(socket.userId);
         for(let temp in io.clients().sockets) {
-            if (message.receiver == io.clients().sockets[temp].userId) {
+            if (message.receiver == io.clients().sockets[temp].userId || socket.request.user._id.toString() == io.clients().sockets[temp].userId.toString()) {
+                console.log('send one message');
                 io.clients().sockets[temp].emit('chatMessage', message);
             }
         }
         saveMessage(message, socket.request.user._id);
-        socket.emit('chatMessage', message);
+        // socket.emit('chatMessage', message);
         // Emit the 'chatMessage' event
     });
 };

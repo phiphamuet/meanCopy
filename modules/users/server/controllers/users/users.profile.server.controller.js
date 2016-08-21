@@ -101,3 +101,25 @@ exports.changeProfilePicture = function (req, res) {
 exports.me = function (req, res) {
   res.json(req.user || null);
 };
+
+exports.findUser = function(req,res){
+  var textSearch = req.body.textSearch;
+  var limit = req.body.limit || 10;
+  var skip = req.body.skip || 0;
+  var user = req.user;
+  if(!textSearch) return res.json([]);
+  var query = new RegExp(textSearch, 'i'); 
+  User.find({
+    _id: {'$ne': user._id},
+    $or: [
+      { firstName: query },
+      { lastName: query },
+      { displayName: query }
+    ]
+  })
+  .limit(limit).skip(skip)
+  .exec(function(err, ids){
+    console.log(ids);
+    res.json(ids);
+  })
+}

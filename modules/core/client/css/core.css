@@ -1,6 +1,16 @@
 .content {
   margin-top: 50px;
 }
+body{
+  height: 90%;
+  min-height: auto;
+  top: 0px !important;
+  overflow: auto !important;
+  position: relative !important;
+}
+html{
+  overflow: initial !important;
+}
 .undecorated-link:hover {
   text-decoration: none;
 }

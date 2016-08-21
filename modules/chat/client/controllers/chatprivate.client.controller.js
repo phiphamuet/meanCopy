@@ -23,6 +23,7 @@ angular.module('chat').controller('ChatPrivateController', ['$scope', '$location
 					receiver: message.receiveId
 				}
 				$scope.messages.unshift(mess);
+				$timeout(function(){document.querySelector("ul.messageContainer").scrollTop = document.querySelector("ul.messageContainer li:last-child").offsetTop});
 			});
 		})
 		.error(function(err){

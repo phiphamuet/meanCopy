@@ -1,28 +1,63 @@
 <!-- The chat view -->
-<section class="container">
+<section class="container chat-container">
   <!--<div class="page-header">
     <h1>Chat Example</h1>
   </div>-->
   <!-- The message form -->
-  <div class="col-xs-12 col-md-4 all-people">
-    <h3>Tìm kiếm người và nhóm</h3>
-    <input class="form-control" type="text" ng-model="searchField"/>
-    <h4 ng-if="listMemberOnline.length>1">Người dùng online</h4>
-    <div class="people online row" ui-sref=".private({id:'{{member._id}}'})" ng-repeat="member in listMemberOnline" ng-if="notMe(member)">
-      <img ng-src="{{member.profileImageURL}}" alt="admin" class="pull-left chat-profile-image"/>
-      <div class="pull-left name-label chat-message-details">
-        <strong>{{member.firstName}}
-          {{member.lastName}}</strong>
-      </div>
+  <div class="col-md-4 col-sm-4 col-xs-2 message-app">
+    <div class="col-xs-12 col-sm-12 col-md-12 hidden-xs people-container">
+      <h4>Tìm kiếm người và nhóm</h4>
+      <!--<input class="form-control" type="text" ng-model="searchField" ng-change="querySearch()"/>-->
+      <form ng-submit="$event.preventDefault()">
+        <md-autocomplete ng-disabled="ctrl.isDisabled" md-no-cache="ctrl.noCache" md-selected-item="ctrl.selectedItem" md-search-text-change="ctrl.searchTextChange(ctrl.searchText)" md-search-text="ctrl.searchText" md-selected-item-change="ctrl.selectedItemChange(item)"
+          md-items="item in ctrl.querySearch(ctrl.searchText)" md-item-text="item.display" md-min-length="0" placeholder="Find friend by name">
+          <md-item-template>
+            <span class="item-title">
+            <img ng-src="{{item.profileImageURL}}" alt="admin" class="pull-left chat-profile-image search-values"/>
+            <span md-highlight-text="ctrl.searchText" md-highlight-flags="i">{{item.display}}</span>
+            </span>
+            <!--<span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.display}}</span>-->
+          </md-item-template>
+          <!--<md-not-found>
+          No states matching "{{ctrl.searchText}}" were found.
+          <a ng-click="ctrl.newState(ctrl.searchText)">Create a new one!</a>
+        </md-not-found>-->
+        </md-autocomplete>
+        <!--<br/>
+      <md-checkbox ng-model="ctrl.simulateQuery">Simulate query for results?</md-checkbox>
+      <md-checkbox ng-model="ctrl.noCache">Disable caching of queries?</md-checkbox>
+      <md-checkbox ng-model="ctrl.isDisabled">Disable the input?</md-checkbox>
+      <p>By default, <code>md-autocomplete</code> will cache results when performing a query.  After the initial call is performed, it will use the cached results to eliminate unnecessary server requests or lookup logic. This can be disabled above.</p>-->
+      </form>
     </div>
-    <h4 ng-if="historyMessage.length>0">Tin nhắn trước đây</h4>
-    <div class="people history row" ui-sref=".private({id:'{{member._id}}'})" ng-repeat="member in historyMessage" ng-if="notOnline(member)">
-      <img ng-src="{{member.profileImageURL}}" alt="admin" class="pull-left chat-profile-image"/>
-      <div class="pull-left name-label chat-message-details">
-        <strong>{{member.firstName}}
-          {{member.lastName}}</strong>
+    <div class="col-xs-12 col-sm-12 col-md-12 all-people">
+      <!--<h4 ng-if="listMemberOnline.length>1" class="hidden-xs">Người dùng online</h4>-->
+      <div class="people online row" ui-sref=".private({id:'{{member._id}}'})" ng-repeat="member in listMemberOnline" ng-if="notMe(member)">
+        <img ng-src="{{member.profileImageURL}}" alt="admin" class="pull-left chat-profile-image" />
+        <div class="pull-left name-label chat-message-details hidden-xs">
+          <strong>{{member.displayName}}</strong>
+        </div>
+        <div class="online-icon">
+          <svg height="10" width="10">
+          <circle cx="5" cy="5" r="5" stroke="none" stroke-width="3" fill="#00cc00" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+        </div>
+      </div>
+      <!--<h4 ng-if="historyMessage.length>0" class="hidden-xs">Tin nhắn trước đây</h4>-->
+      <div class="people history row" ui-sref=".private({id:'{{member._id}}'})" ng-repeat="member in historyMessage" ng-if="notOnline(member)">
+        <img ng-src="{{member.profileImageURL}}" alt="admin" class="pull-left chat-profile-image" />
+        <div class="pull-left name-label chat-message-details hidden-xs">
+          <strong>{{member.displayName}}</strong>
+        </div>
       </div>
     </div>
   </div>
-  <div ui-view></div>
+  <div ui-view class="fill"></div>
 </section>
+<div class="hidden not-support">
+  <h1>Screen do not support.</h1>
+  <p>
+    App only support for screen device larger than 280px!
+  </p>
+</div>

@@ -1,23 +1,45 @@
-<h1>{{receiver.displayName}}</h1>
-<ul class="list-unstyled col-md-offset-4 col-md-8 messageContainer">
-  <!-- List all messages -->
-  <li class="col-xs-12 col-md-12 chat-message" ng-repeat="message in messages" ng-class="notMe(message.sender)?'other-message':'my-message'">
-    <small class="text-muted" ng-bind="message.created | date:'dd/MM HH:mm'"></small>
-    <div class="chat-message-details">
-      <strong ng-bind="message.username"></strong>
-      <br>
-      <span ng-bind="message.text"></span>
-    </div>
-    <img ng-src="{{message.profileImageURL}}" alt="{{message.username}}" class="chat-profile-image"/>
-  </li>
-</ul>
-<form class="col-xs-12 col-md-offset-4 col-md-8" ng-submit="sendMessage();">
+<h3 class="receiver">{{receiver.displayName}}</h3>
+<div class="messengerContainer col-xs-10 col-sm-8 col-md-8">
+  <ul class="list-unstyled col-md-12 col-sm-12 messageContainer"> 
+    <li class="col-xs-12 col-md-12 col-sm-12 chat-message" ng-repeat="message in messages" ng-class="notMe(message.sender)?'other-message':'my-message'">
+      <small class="text-muted hidden-xs time-message-label" ng-bind="message.created | date:'dd/MM HH:mm'"></small>
+      <small class="text-muted visible-xs hidden-md time-message-label" ng-bind="message.created | date:'HH:mm'"></small>
+      <div class="chat-message-details">
+        <strong ng-bind="message.username"></strong>
+        <br>
+        <p ng-bind="message.text"></p>
+      </div>
+      <img ng-src="{{message.profileImageURL}}" alt="{{message.username}}" class="chat-profile-image" />
+    </li>
+  </ul>
+  <!--<md-list layout-padding class="messageContainer">
+    <md-list-item class="md-3-line" ng-repeat="message in messages" ng-class="notMe(message.sender)?'other-message-material other-message':'my-message my-message-material'">
+      <img ng-src="{{message.profileImageURL}}" class="md-avatar" alt="{{message.username}}">
+      <div class="md-list-item-text">
+        <h4>{{message.username}}</h4>
+        <small>{{message.created | date:'HH:mm'}}</small>
+        <p>
+          {{message.text}}
+        </p>
+      </div>
+    </md-list-item>
+  </md-list>-->
+</div>
+<form class="col-xs-12 col-md-8 col-md-offset-4 col-sm-12 formMessage" ng-submit="sendMessage();">
+  <!--<md-content md-theme="docs-dark" layout-gt-sm="row" layout-padding>
+    <md-input-container class="md-block">
+      <label>Message</label>
+      <input ng-model="messageText">
+    </md-input-container>
+  </md-content>-->
   <fieldset class="row">
     <div class="input-group">
       <input type="text" id="messageText" autocomplete="off" name="messageText" class="form-control" ng-model="messageText" placeholder="Enter new message">
       <span class="input-group-btn">
-          <button type="submit" class="btn btn-primary" ng-disabled="!messageText.length">Submit</button>
-        </span>
+        <button type="submit" class="btn btn-primary" ng-disabled="!messageText.length">
+          <i class="fa fa-send"></i>
+        </button>
+      </span>
     </div>
   </fieldset>
 </form>

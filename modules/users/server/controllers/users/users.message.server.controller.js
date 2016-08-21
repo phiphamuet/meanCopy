@@ -23,6 +23,8 @@ exports.message = function (req, res) {
   // For security measurement we remove the roles from the req.body object
   delete req.body.roles;
   var id = req.params.id;
+  var limit = req.params.limit||10;
+  var skip = req.params.skip||0;
 
   if (user) {
     // Merge existing user
@@ -35,15 +37,16 @@ exports.message = function (req, res) {
             { receiveId: receiver._id, sendId: user._id }
           ]
         })
-          .limit(10)
-          .sort({ created: -1 })
-          .exec(function (err, messages) {
-            if (err) return res.status(400).send(err);
-            res.json({
-              receiver: receiver,
-              messages: messages
-            });
+        .limit(limit)
+        .skip(skip)
+        .sort({ created: -1 })
+        .exec(function (err, messages) {
+          if (err) return res.status(400).send(err);
+          res.json({
+            receiver: receiver,
+            messages: messages
           });
+        });
       } else {
         res.status(400).send({
           message: 'User not found'

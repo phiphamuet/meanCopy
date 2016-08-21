@@ -2,30 +2,186 @@
   margin-top: 10px;
   padding-top: 10px;
 }
+
 .chat-message:not(:first-child) {
   border-top: 1px solid #e7e7e7;
 }
+
 .chat-message-details {
-  margin-left: 10px;
+  margin: 2px 0 0 10px;
+  max-width: 50%;
 }
+
 .chat-profile-image {
   height: 28px;
   width: 28px;
   border-radius: 50%;
 }
-.messageContainer{
+
+.messageContainer {
   overflow-y: scroll;
-  max-height: 400px; 
+  max-height: calc(100% - 10px);
+  height: 100%;
 }
-.my-message{
+
+.my-message {
   float: right;
 }
-.my-message > *{
+
+.my-message-material {
+  width: 100%;
+  display: block;
+}
+
+.my-message> * {
   float: right;
 }
-.other-message{
+
+.other-message {
   float: left;
 }
-.other-message> *{
+
+.other-message {
   float: left;
+}
+
+.other-message-material {
+  width: 100%;
+  display: block;
+}
+
+.other-message> * {
+  float: left;
+}
+
+.messengerContainer {
+  position: relative;
+  height: calc(100% - 100px);
+}
+
+.formMessage {
+  min-height: 35px;
+}
+
+.search-values {
+  margin: 10px 10px 0 0;
+  width: 28px;
+  height: 28px;
+}
+
+.highlight {
+  font-weight: bold;
+}
+.all-people .people{
+  margin: 10px 0;
+}
+
+.receiver {
+  text-align: center;
+}
+
+.all-people {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+section {
+  height: 100%;
+}
+
+.fill {
+  height: 100%;
+}
+
+.time-message-label {
+  margin: 5px 0 0;
+}
+
+.formMessage .md-block {
+  width: 100%;
+}
+
+.online-icon {
+  position: absolute;
+  right: 30px;
+  margin: 2px 0 0 0;
+}
+.receiver{
+  text-align: center;
+}
+
+@media screen and (max-width: 769px) {
+  .all-people {
+    margin-top: 20px;
+  }
+  .all-people .chat-profile-image {
+    width: 50px;
+    height: 50px;
+  }
+  .online-icon {
+    position: static;
+    display: block;
+    margin: 0px;
+  }
+}
+
+@media screen and (max-width: 681px) {
+  .messengerContainer {
+    position: relative;
+    height: calc(100% - 64px);
+  }
+  .chat-container{
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  .chat-container .container{
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  .online-icon {
+    position: static;
+  }
+  .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12{
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+  .formMessage{
+    position: fixed;
+    bottom: 0px;
+    display: block;
+    right: 16px;
+    width: calc(100% - 32px);
+  }
+  .messageContainer{
+    padding: 0 5px;
+  }
+  .message-app .people-container{
+    height: 100%;
+  }
+  .message-app .all-people{
+    border-right: 1px solid #888;
+  }
+  .message-app{
+    height: calc(100% - 41px);
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .online-icon{
+    margin: -4px 0;
+  }
+  .all-people .chat-profile-image{
+    width: 40px;
+    height: 40px;
+  }
+}
+@media screen and (max-width: 279px) {
+  .chat-container{
+    display: none;
+  }
+  .not-support{
+    display: block !important;
+    text-align: center;
+  }
 }
