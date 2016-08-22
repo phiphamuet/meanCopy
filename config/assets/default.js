@@ -20,7 +20,8 @@ module.exports = {
         'public/lib/angular-file-upload/angular-file-upload.js',
         'public/lib/owasp-password-strength-test/owasp-password-strength-test.js',
         'public/lib/angular-material/angular-material.js',
-        'public/lib/angular-aria/angular-aria.js'
+        'public/lib/angular-aria/angular-aria.js',
+        'public/lib/jquery/dist/jquery.min.js'
       ],
       tests: ['public/lib/angular-mocks/angular-mocks.js']
     },

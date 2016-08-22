@@ -1,15 +1,17 @@
-<h3 class="receiver col-xs-10 col-sm-10 col-md-8">{{receiver.displayName}}</h3>
+<h3 class="receiver col-xs-10 col-sm-8 col-md-8">{{receiver.displayName}}</h3>
 <div class="messengerContainer col-xs-10 col-sm-8 col-md-8">
-  <ul class="list-unstyled col-md-12 col-sm-12 messageContainer"> 
+  <ul class="list-unstyled col-md-12 col-sm-12 messageContainer" load-message scrolly="loadMessage()">
     <li class="col-xs-12 col-md-12 col-sm-12 chat-message" ng-repeat="message in messages" ng-class="notMe(message.sender)?'other-message':'my-message'">
-      <small class="text-muted hidden-xs time-message-label" ng-bind="message.created | date:'dd/MM HH:mm'"></small>
-      <small class="text-muted visible-xs hidden-md time-message-label" ng-bind="message.created | date:'HH:mm'"></small>
-      <div class="chat-message-details">
-        <strong ng-bind="message.username"></strong>
-        <br>
-        <p ng-bind="message.text"></p>
+      <div class="message-element">
+        <!--<small class="text-muted visible-xs hidden-md time-message-label" ng-bind="message.created | date:'HH:mm'"></small>-->
+        <div class="chat-message-details">
+          <!--<strong ng-bind="message.username"></strong>-->
+          <!--<br>-->
+          <p ng-bind="message.text"></p>
+        </div>
+        <img ng-src="{{message.profileImageURL}}" alt="{{message.username}}" class="chat-profile-image" />
       </div>
-      <img ng-src="{{message.profileImageURL}}" alt="{{message.username}}" class="chat-profile-image" />
+      <small class="hidden text-muted time-message-label" ng-bind="message.created | date:'dd/MM HH:mm'"></small>
     </li>
   </ul>
   <!--<md-list layout-padding class="messageContainer">
@@ -25,7 +27,7 @@
     </md-list-item>
   </md-list>-->
 </div>
-<form class="col-xs-12 col-md-8 col-md-offset-4 col-sm-12 formMessage" ng-submit="sendMessage();">
+<form class="col-xs-12 col-md-8 col-md-offset-4 col-sm-8 col-sm-offset-4 formMessage" ng-submit="sendMessage();">
   <!--<md-content md-theme="docs-dark" layout-gt-sm="row" layout-padding>
     <md-input-container class="md-block">
       <label>Message</label>
