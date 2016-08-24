@@ -17,7 +17,6 @@
   "scripts": {
     "start": "grunt --force",
     "test": "grunt test",
-    // "postinstall": "bower install",
     "prod": "grunt prod --force"
   },
   "dependencies": {
